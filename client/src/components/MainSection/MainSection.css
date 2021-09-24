@@ -1,0 +1,83 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+.main-section{
+
+width:100%;
+height:90vh;
+max-height: fit-content;
+margin:0;
+padding:0;
+}
+
+.main-section-grid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height:100%;
+  
+}
+.voter-panel{
+
+    width:50%;
+    height:100%;
+     margin:auto;
+
+}
+.voter-image-container{
+
+    align-items: center;
+    width:50%;
+    height:100%;
+     margin:auto;
+     display: flex;
+     align-items: center;
+}
+
+.voter-image{
+    width:80%;
+    height:60%;
+  
+}
+
+.content-container{
+ 
+    font-family: 'Poppins', sans-serif;
+    margin:auto;
+    width:80%;
+    height:fit-content;
+}
+    
+.content-container >h1{
+    text-transform: uppercase;
+    font-size: clamp(1.5rem,5vw,4rem);
+    color:black
+}
+.content-container >h2{
+    
+    font-size: clamp(1.2rem,2vw,4rem);
+    color:black;
+}
+.content-container >h3{
+    color:black;
+    font-size: clamp(0.7rem,0.8vw,4rem);
+    font-weight: 500;
+}
+
+
+.vote-button{
+    outline: 0;
+    border:0;
+    background-color: black;
+    color: white;
+    height:40px;
+    width:120px;
+    transition: 400ms;
+}
+
+.vote-button:hover{
+    transition: 400ms;
+    cursor: pointer;
+    background-color: white;
+    color:black;
+}
