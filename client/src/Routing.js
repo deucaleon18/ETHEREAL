@@ -15,12 +15,11 @@ const Routing = () => {
           <Route exact path="/">
             <MainSection />
           </Route>
-
-          <Route exact path="/transfer">
+          <Route exact path="/transfer:id">
             <TransferMoney />
           </Route>
           <Route exact path="/create">
-            <CreateAccount/>
+            <CreateAccount />
           </Route>
           <Route exact path="/accounts">
             <DisplayAccounts />
@@ -29,9 +28,10 @@ const Routing = () => {
           <Route exact path="/accounts/:id">
             <AccountDetails />
           </Route>
-          <Route exact path="/loans">
+          <Route exact path="/loans/:id">
             <LoanTransaction />
           </Route>
+          
         </Router>
       </div>
     );

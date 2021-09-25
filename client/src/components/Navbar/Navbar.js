@@ -12,13 +12,13 @@ const Navbar = () => {
           <a href="/">
             <li className="navlistelements">HOME</li>
           </a>
-          <a href="/about">
+          {/* <a href="/about">
             <li className="navlistelements">ABOUT</li>
+          </a> */}
+          <a href="/accounts">
+            <li className="navlistelements">ACCOUNTS</li>
           </a>
-          <a href="/vote">
-            <li className="navlistelements">LOGIN</li>
-          </a>
-          <a href="/register">
+          <a href="/create">
             <li className="navlistelements">REGISTER</li>
           </a>
         </ul>

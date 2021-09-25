@@ -17,14 +17,14 @@ padding:0;
     height:100%;
   
 }
-.voter-panel{
+.hero-panel{
 
     width:50%;
     height:100%;
      margin:auto;
 
 }
-.voter-image-container{
+.bank-image-container{
 
     align-items: center;
     width:50%;
@@ -34,7 +34,7 @@ padding:0;
      align-items: center;
 }
 
-.voter-image{
+.bank-image{
     width:80%;
     height:60%;
   
@@ -65,7 +65,7 @@ padding:0;
 }
 
 
-.vote-button{
+.start-button{
     outline: 0;
     border:0;
     background-color: black;
@@ -75,7 +75,7 @@ padding:0;
     transition: 400ms;
 }
 
-.vote-button:hover{
+.start-button:hover{
     transition: 400ms;
     cursor: pointer;
     background-color: white;

@@ -8,8 +8,11 @@ const DisplayAccounts = () => {
   const [contract, setContract] = useState(undefined);
   const [account, setAccount] = useState(undefined);
   const [web3, setWeb3] = useState(undefined);
+  const [loading,setLoading]=useState(true)
+
+
   // eslint-disable-next-line
-  const [storageValue, setStorageValue] = useState(undefined);
+  const [bankAccounts, setBankAccounts] = useState([]);
 
   useEffect(() => {
     const getBasicDetails = async () => {
@@ -43,7 +46,31 @@ const DisplayAccounts = () => {
   }, []);
 
   useEffect(() => {
-    const getContractDetails = async () => {};
+    const getContractDetails = async () => {
+      
+
+      const serialNumber=await contract.methods.serialNumber().call()
+      console.log(serialNumber)
+
+
+     for(let i=1;i<=serialNumber;i++)
+      {await contract.methods.accounts(i).call()
+      .then((res)=>{
+        var bankAcc=bankAccounts;
+        bankAcc.push({name:res.name,location:res.location,serialNumber:res.serial,balance:res.balance})
+        setBankAccounts(bankAcc)
+        console.log(res)
+        console.log(bankAccounts)
+        
+        })
+      .catch((err)=>{
+        console.log(err)
+      })
+      
+      }
+
+      setLoading(false)
+    };
     if (
       typeof contract !== "undefined" &&
       typeof account !== "undefined" &&
@@ -52,11 +79,55 @@ const DisplayAccounts = () => {
       getContractDetails();
     }
   }, [web3, account, contract]);
+  
+  
+
+
+
+  const id='fsfwefrwefr'
+  
+
 
   if (!web3) {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
-  return <div className="transaction-section"></div>;
+  return (
+
+
+    <div className="display-accounts">
+      <div className="accounts">
+        <div className="account-bars-container">
+           {
+            !loading?bankAccounts.map((account)=>{
+           return (
+          <div
+            className="account-bars"
+            onClick={() => (window.location = `/accounts/${account.serialNumber}`)}
+          >
+            <h1 className="account-bars-title">{account.name}</h1>
+            <h1 className="account-bars-title">{account.serialNumber}</h1>
+          </div>)
+
+
+            }):null
+
+            
+           }
+       
+          
+          {/* <div className="account-bars"></div>
+          <div className="account-bars"></div>
+          <div className="account-bars"></div>
+          <div className="account-bars"></div>
+          <div className="account-bars"></div> */}
+        </div>
+      </div>
+
+      <div className="accounts-image">
+        <img src="./assets/4.svg" className="accounts-display-image" />
+      </div>
+    </div>
+  );
 };
 
 export default DisplayAccounts;

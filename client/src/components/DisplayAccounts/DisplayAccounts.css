@@ -1,0 +1,65 @@
+.display-accounts{
+    height:90vh;
+    display:flex;
+    flex-direction:row;
+}
+
+.accounts{
+height:100%;
+width:55%;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.account-bars-container{
+    height:80%;
+    width:90%;
+    padding:30px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.account-bars{
+    margin:30px;
+    padding:0 30px;
+    height:150px;
+    width:90%;
+    background-color: black;
+    
+    border-radius: 15px;
+    color:white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.account-bars:hover{
+    transition: 400ms;
+    background-color: white;
+    color:black;
+    cursor: pointer;
+}
+
+.account-bars-title{
+    font-size:clamp(0.5rem,0,8rem,1rem);
+    font-weight: 300;
+}
+
+
+.accounts-image{
+    height:100%;
+    width:45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accounts-display-image{
+    height:65%;
+    width:65%;
+}

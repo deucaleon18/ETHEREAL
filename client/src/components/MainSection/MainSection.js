@@ -60,7 +60,7 @@ const MainSection = () => {
   return (
     <div className="main-section">
       <div className="main-section-grid">
-        <div className="voter-panel">
+        <div className="hero-panel">
           <div className="content-container">
             <h1>ethereal</h1>
             <h2>The most secure banking platform</h2>
@@ -69,17 +69,17 @@ const MainSection = () => {
               as this application is secured using blockchain.
             </h3>
             <button
-              className="vote-button"
+              className="start-button"
               onClick={() => {
-                window.location = "/voting";
+                window.location = "/create";
               }}
             >
               GET STARTED
             </button>
           </div>
         </div>
-        <div className="voter-image-container">
-          <img alt="" src="./assets/1.svg" className="voter-image" />
+        <div className="bank-image-container">
+          <img alt="" src="./assets/3.svg" className="bank-image" />
         </div>
       </div>
     </div>
