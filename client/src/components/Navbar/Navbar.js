@@ -1,7 +1,15 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import "./Navbar.css";
 
 const Navbar = () => {
+  
+   const[logged,setLogged]=useState(false)
+ useEffect(()=>{
+   const logged=localStorage.getItem("logged")
+   setLogged(logged)
+ })
+
+
   return (
     <div className="navbar">
       <div className="navlogocontainer">
@@ -12,15 +20,20 @@ const Navbar = () => {
           <a href="/">
             <li className="navlistelements">HOME</li>
           </a>
-          {/* <a href="/about">
-            <li className="navlistelements">ABOUT</li>
-          </a> */}
+          <a href="/about">
+            <li className="navlistelements">LOGIN</li>
+          </a>
+
+          {logged?( 
+            <>
           <a href="/accounts">
             <li className="navlistelements">ACCOUNTS</li>
           </a>
           <a href="/create">
             <li className="navlistelements">REGISTER</li>
           </a>
+          </>): null}
+        
         </ul>
       </div>
     </div>

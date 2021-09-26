@@ -10,18 +10,23 @@ const AccountDetails = () => {
   const [account, setAccount] = useState(undefined);
   const [web3, setWeb3] = useState(undefined);
   const [contractAddress,setContractAddress]=useState(undefined)
+  const [bankingAccount,setBankingAccount]=useState(undefined)
+  const [loading,setLoading]=useState(true)
+  
+  
 
-  const bankAccount = "0xdaB74b7DbA038eec5A99CE26257668CB86f6EC0C";
   const [balanceAdded, setBalanceAdded] = useState("");
+
+
+
   const [balanceWithdrawn, setBalanceWithdrawn] = useState("");
 
-
-  // eslint-disable-next-line
-  const [storageValue, setStorageValue] = useState(undefined);
 
   //Use the same variable predefined after " :"
   const { id } = useParams();
 
+
+  //Loading web3 , contract , account
   useEffect(() => {
     const getBasicDetails = async () => {
       try {
@@ -50,22 +55,57 @@ const AccountDetails = () => {
         console.error(error);
       }
     };
-
     getBasicDetails();
   }, []);
-
+ 
+  
   useEffect(() => {
-    const getContractDetails = async () => {};
+    const getContractDetails = async () => {
+      console.log(id)
+      await contract.methods.accounts(id).call()
+      .then((res)=>{
+        setBankingAccount(res)
+        console.log(res)
+      })
+      .then(()=>{
+         setLoading(false)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    
+      //Get the contact balance
+      await contract.methods.getContractBalance().call()
+      .then((res)=>{console.log(web3.utils.fromWei(res, "ether"));})
+      .catch((err)=>{console.log(err)})
+      
+      //Get the sender balance
+      await contract.methods
+        .getSenderBalance(account)
+        .call()
+        .then((res) => {
+          console.log(account)
+          console.log(web3.utils.fromWei(res,'ether'));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  
+    };
     if (
       typeof contract !== "undefined" &&
       typeof account !== "undefined" &&
       typeof web3 !== "undefined"
     ) {
       console.log(contract);
+      console.log(contract.options.address);
       console.log(contractAddress)
       getContractDetails();
     }
   }, [web3, account, contract]);
+
+
+  
 
 
 
@@ -86,6 +126,7 @@ const AccountDetails = () => {
      await contract.methods.addBalance(id,balanceAdded).send({from:account,value:balanceAdded})
 
       .then((res)=>{
+        window.location.reload();
        console.log(res)
       })
       .catch((err)=>{
@@ -93,6 +134,13 @@ const AccountDetails = () => {
       })
     }
   };
+
+
+
+
+
+
+
 
 
 //Function handler on withdrawing balance
@@ -107,12 +155,20 @@ const AccountDetails = () => {
       typeof web3 !== "undefined"
     ) 
     { 
-      console.log(bankAccount)
+        console.log(contract.options.address);
+       
       await contract.methods
-        .withdrawBalance(id, balanceWithdrawn)
-        .send({from:bankAccount,to:account,value: balanceWithdrawn })
-         
+        .withdrawBalance(id, balanceWithdrawn, account
+
+        //Here from and to is only for sending gas from our deployed account to the contract to just call the method
+        //In the contract the withdrawAmount is transferred from the contract to our specified ethereum account here
+
+        ).send({from:account,to:contract.options.address})
+        
+
         .then((res) => {
+          window.location.reload()
+
           console.log(res);
         })
         .catch((err) => {
@@ -129,9 +185,15 @@ const AccountDetails = () => {
   }
   return (
     <div className="account-details-section">
-      <div className="account-card"></div>
-      <div className="transfer-balance-card"></div>
-      <div className="loan-transaction-card"></div>
+      <div className="account-card">
+        {!loading ? (
+          <div>
+            <h1>{bankingAccount.serial}</h1>
+            <h1>{bankingAccount.name}</h1>
+            <h1>{bankingAccount.balance}</h1>
+          </div>
+        ) : null}
+      </div>
 
       <div className="add-balance-card">
         <form onSubmit={addBalance}>
@@ -147,7 +209,6 @@ const AccountDetails = () => {
         </form>
       </div>
       <div className="withdraw-balance-card">
-
         <form onSubmit={withdrawBalance}>
           <input
             type="number"
@@ -160,6 +221,24 @@ const AccountDetails = () => {
           <button type="submit"> WITHDRAW</button>
         </form>
 
+        <div className="transfer-balance-card">
+          <button
+            onClick={() => {
+              window.location = "transfer/:id";
+            }}
+          >
+            TRANSFER BALANCE TO OTHER ACCOUNTS
+          </button>
+        </div>
+        <div className="loan-transaction-card">
+          <button
+            onClick={() => {
+              window.location = "loans/:id";
+            }}
+          >
+            GET EASY LOANS
+          </button>
+        </div>
       </div>
     </div>
   );

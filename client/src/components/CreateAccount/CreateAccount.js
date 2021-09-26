@@ -12,9 +12,7 @@ const CreateAccount = () => {
   const [accountHolder,setAccountHolder]=useState("")
   const [accountLocation,setAccountLocation]=useState("")
   
-  // eslint-disable-next-line
-  const [storageValue, setStorageValue] = useState(undefined);
-  
+ 
 
 
 
@@ -32,7 +30,9 @@ const CreateAccount = () => {
         const accounts = await web3.eth.getAccounts();
 
         // Get the contract instance.
-        const networkId = await web3.eth.net.getId();
+        // const networkId = await web3.eth.net.getId();
+
+
         const deployedNetwork = BankingContract.networks[5777];
         
         console.log(deployedNetwork.address)
@@ -64,6 +64,7 @@ const CreateAccount = () => {
       typeof web3 !== "undefined"
     ) {
       console.log(contract)
+      console.log(account)
       web3.eth.defaultAccount=account;
       getContractDetails();
       
@@ -80,11 +81,12 @@ const CreateAccount = () => {
         typeof account !== "undefined" &&
         typeof web3 !== "undefined"
       ) {
+
         await contract.methods
           .createAccount(accountHolder, accountLocation)
           .send({
             from: account,
-            to: "0xdaB74b7DbA038eec5A99CE26257668CB86f6EC0C",
+            to: contract.options.address,
             value: 2000000000000000000,
           })
           .then((res) => {

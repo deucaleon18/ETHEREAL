@@ -1,7 +1,9 @@
 .account-details-section{
     height:90vh;
-    display:grid;
+    display:flex;
     
 }
-
+.add-balance-card{
+    margin:10px;
+}
 
