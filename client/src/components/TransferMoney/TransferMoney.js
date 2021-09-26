@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import BankingContract from "../../contracts/Banking.json";
 import getWeb3 from "../../getWeb3";
 
@@ -8,9 +9,11 @@ const TransferMoney = () => {
   const [contract, setContract] = useState(undefined);
   const [account, setAccount] = useState(undefined);
   const [web3, setWeb3] = useState(undefined);
-  // eslint-disable-next-line
-  const [storageValue, setStorageValue] = useState(undefined);
-
+  
+  const[transferAmount,setTransferAmount]=useState("")
+  const[transferSerial,setTransferSerial]=useState("")
+  
+  const { id }=useParams()
   useEffect(() => {
     const getBasicDetails = async () => {
       try {
@@ -52,11 +55,37 @@ const TransferMoney = () => {
       getContractDetails();
     }
   }, [web3, account, contract]);
+  
+
+  const handleTransaction=async(e)=>{
+   e.preventDefault()
+   await contract.methods.transactAmount(transferAmount,transferSerial,id).send({from:account,to:contract.options.address,value:transferAmount})
+   
+   .then((res)=>{
+     console.log(res)
+   })
+   .catch((err)=>{
+     console.log(err)
+   })
+  }
+
 
   if (!web3) {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
-  return <div className="transaction-section"></div>;
+  return (
+    <div className="transaction-section">
+      <h1>Welcome to the transfers section</h1>
+
+      <h2>Welcome to the transfers section</h2>
+
+      <form onSubmit={handleTransaction}>
+        <input type="text" placeholder="Enter the amount you want to transfer " value={transferAmount} onChange={(e)=>{setTransferAmount(e.target.value)}}></input>
+        <input type="text" placeholder="Enter the serial number of the account you want to transfer this amount" value={transferSerial} onChange={(e)=>{setTransferSerial(e.target.value)}}/>
+        <button className="transfer-button" type="submit">INITITATE TRANSFER</button>
+      </form>
+    </div>
+  );
 };
 
 export default TransferMoney;

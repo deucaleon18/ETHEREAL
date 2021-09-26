@@ -12,25 +12,42 @@ const MainSection = () => {
   // eslint-disable-next-line
   const [storageValue, setStorageValue] = useState(undefined);
 
+
+
   useEffect(() => {
+
+
     const getBasicDetails = async () => {
       try {
         // Get network provider and web3 instance.
         const web3 = await getWeb3();
+   
+
 
         // Use web3 to get the user's accounts.
         const accounts = await web3.eth.getAccounts();
+        
+
 
         // Get the contract instance.
         const networkId = await web3.eth.net.getId();
+
         const deployedNetwork = BankingContract.networks[networkId];
+
+
         const instance = new web3.eth.Contract(
           BankingContract.abi,
           deployedNetwork && deployedNetwork.address
         );
+
+
         setWeb3(web3);
         setAccount(accounts[0]);
         setContract(instance);
+
+
+
+
       } catch (error) {
         // Catch any errors for any of the above operations.
         alert(
@@ -43,6 +60,9 @@ const MainSection = () => {
     getBasicDetails();
   }, []);
 
+
+
+
   useEffect(() => {
     const getContractDetails = async () => {};
     if (
@@ -50,9 +70,19 @@ const MainSection = () => {
       typeof account !== "undefined" &&
       typeof web3 !== "undefined"
     ) {
+      localStorage.setItem("logged",true)
+
+    //   await contract.methods.loginAccount(account).call()
+    //   .then((res)=>{
+    //     console.log(res)
+    //   })
+    //   .catch((err)=>{})
       getContractDetails();
     }
   }, [web3, account, contract]);
+
+
+
 
   if (!web3) {
     return <div>Loading Web3, accounts, and contract...</div>;

@@ -7,6 +7,7 @@ const Navbar = () => {
  useEffect(()=>{
    const logged=localStorage.getItem("logged")
    setLogged(logged)
+   console.log(logged)
  })
 
 
@@ -20,9 +21,9 @@ const Navbar = () => {
           <a href="/">
             <li className="navlistelements">HOME</li>
           </a>
-          <a href="/about">
+          {/* <a href="/about">
             <li className="navlistelements">LOGIN</li>
-          </a>
+          </a> */}
 
           {logged?( 
             <>

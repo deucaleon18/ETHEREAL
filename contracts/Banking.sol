@@ -8,31 +8,34 @@ contract Banking {
 
 
     //The owner of the contract
-    address payable owner;
+    // address payable owner;
+
     uint256 public serialNumber = 0;
     uint256 public transacNum = 0;
-    uint256 public bankBalance=0;
+    uint256 public bankBalance = 0;
 
-
-
+    
 
     // constructor() public {
     //     owner = msg.sender;
     // }
 
     
-    function accountLogin(address payable _creator)public {
-       owner=_creator;
-    }
+    // function accountLogin(address payable _creator)public {
+    //   address payable owner=_creator;
+     
+
+    // //Defined condition to check that the owner who has logged in can only do these transactions
+    // modifier onlyOwner() {
+    //     require(msg.sender == );
+    //     _;
+    // }
+
+    // }
     
 
 
 
-    //Defined condition to check that the owner who has logged in can only do these transactions
-    modifier onlyOwner() {
-        require(msg.sender == owner);
-        _;
-    }
 
 
 
@@ -86,7 +89,7 @@ contract Banking {
     function createAccount(address payable _creator,string memory _name, string memory _location)
         public
         payable
-        onlyOwner
+     
     {
         serialNumber++;
         accounts[serialNumber] = Account(
@@ -105,7 +108,11 @@ contract Banking {
 
 
 //Function to add balance to your existing acccount ,the balance will be taken from your ethereum account
-    function addBalance(uint256 _serial, uint256 _amount) public payable onlyOwner{
+    function addBalance(uint256 _serial, uint256 _amount) public payable 
+    
+   
+    
+    {
         balances[_serial] += _amount/1000000000000000000;
         accounts[_serial].balance += _amount/1000000000000000000;
         bankBalance+=_amount/1000000000000000000;
@@ -119,7 +126,11 @@ contract Banking {
         uint _serial,
         uint256 _amount,
         address payable _ownerAccount
-    ) external payable  onlyOwner returns  (bool _success)  {
+    ) external payable  
+    
+ 
+    
+     returns  (bool _success)  {
         _ownerAccount.transfer(_amount);
         balances[_serial]-=_amount/1000000000000000000;
         accounts[_serial].balance-=_amount/1000000000000000000;
@@ -136,17 +147,26 @@ contract Banking {
         uint256 _amount,
         uint256 _serial_2,
         uint256 _serial
-    ) public payable  onlyOwner {
-        balances[_serial] -= _amount;
-        accounts[_serial].balance -= _amount;
+    ) public payable 
+    
 
-        balances[_serial_2] += _amount;
-        accounts[_serial_2].balance += _amount;
+     
+     {
+        balances[_serial] -= _amount/1000000000000000000;
+        accounts[_serial].balance -= _amount/1000000000000000000;
+
+        balances[_serial_2] += _amount/1000000000000000000;
+        accounts[_serial_2].balance += _amount/1000000000000000000;
     }
 
 
+
+
 //Function to get a loan from the bank the accounts will be virtually updated but the actual ETH will only be transferred if you want to withdraw the amount 
-    function getLoan(uint256 _amount, uint256 _serial)  public payable  onlyOwner  {
+    function getLoan(uint256 _amount, uint256 _serial)  public payable  
+    
+    
+    {
         balances[_serial] += _amount/1000000000000000000;
         accounts[_serial].balance += _amount/1000000000000000000;
 
@@ -156,7 +176,11 @@ contract Banking {
 
 
 //Simple spare function to getBalance of any of the serial accounts won't be of much use but let's see
-    function getBalance(uint256 _serial) public view   onlyOwner returns (uint256) {
+    function getBalance(uint256 _serial) public view  
+    
+
+    
+     returns (uint256) {
         uint256 bal = accounts[_serial].balance;
         return bal;
     }
@@ -184,7 +208,7 @@ contract Banking {
 
 //Function to get the owner
 
-function getOwner() public view  onlyOwner returns(address){
+function getOwner() public view   returns(address){
   return msg.sender;
 }
 

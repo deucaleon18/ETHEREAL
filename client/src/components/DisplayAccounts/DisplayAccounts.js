@@ -57,7 +57,8 @@ const DisplayAccounts = () => {
       {await contract.methods.accounts(i).call()
       .then((res)=>{
         var bankAcc=bankAccounts;
-        bankAcc.push({name:res.name,location:res.location,serialNumber:res.serial,balance:res.balance})
+        if(res.creator===account)
+        {bankAcc.push({name:res.name,location:res.location,serialNumber:res.serial,balance:res.balance})}
         setBankAccounts(bankAcc)
         console.log(res)
         console.log(bankAccounts)

@@ -25,7 +25,7 @@ const AccountDetails = () => {
   //Use the same variable predefined after " :"
   const { id } = useParams();
 
-
+  
   //Loading web3 , contract , account
   useEffect(() => {
     const getBasicDetails = async () => {
@@ -224,7 +224,7 @@ const AccountDetails = () => {
         <div className="transfer-balance-card">
           <button
             onClick={() => {
-              window.location = "transfer/:id";
+              window.location = `/transfer/${id}`;
             }}
           >
             TRANSFER BALANCE TO OTHER ACCOUNTS
@@ -233,7 +233,8 @@ const AccountDetails = () => {
         <div className="loan-transaction-card">
           <button
             onClick={() => {
-              window.location = "loans/:id";
+              
+               window.location = `/loans/${id}`;
             }}
           >
             GET EASY LOANS

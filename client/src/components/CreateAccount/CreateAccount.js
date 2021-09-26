@@ -56,6 +56,10 @@ const CreateAccount = () => {
     getBasicDetails();
   }, []);
 
+
+
+
+
   useEffect(() => {
     const getContractDetails = async () => {};
     if (
@@ -73,6 +77,9 @@ const CreateAccount = () => {
 
 
 
+
+
+
     const handleSubmit = async (e) => {
       e.preventDefault();
       console.log(contract.methods);
@@ -83,7 +90,7 @@ const CreateAccount = () => {
       ) {
 
         await contract.methods
-          .createAccount(accountHolder, accountLocation)
+          .createAccount(account,accountHolder, accountLocation)
           .send({
             from: account,
             to: contract.options.address,

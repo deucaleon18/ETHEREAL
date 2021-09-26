@@ -15,7 +15,7 @@ const Routing = () => {
           <Route exact path="/">
             <MainSection />
           </Route>
-          <Route exact path="/transfer:id">
+          <Route exact path="/transfer/:id">
             <TransferMoney />
           </Route>
           <Route exact path="/create">
