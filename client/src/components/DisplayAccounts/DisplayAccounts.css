@@ -1,5 +1,6 @@
 .display-accounts{
-    height:90vh;
+    min-height:90vh;
+    height:auto;
     display:flex;
     flex-direction:row;
 }
@@ -8,10 +9,18 @@
 height:100%;
 width:55%;
 display: flex;
-align-items: center;
+flex-direction: column;
+
 justify-content: center;
 }
 
+
+
+.accounts>h1{
+    font-weight: 800;
+    font-size:clamp(1.2rem,3.2rem,6rem);
+    margin:40px 50px 10px 50px;
+}
 .account-bars-container{
     height:80%;
     width:90%;
@@ -25,7 +34,7 @@ justify-content: center;
 .account-bars{
     margin:30px;
     padding:0 30px;
-    height:150px;
+    height:100px;
     width:90%;
     background-color: black;
     

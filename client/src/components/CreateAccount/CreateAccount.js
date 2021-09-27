@@ -122,12 +122,12 @@ const CreateAccount = () => {
         <div className="form-wrapper">
           <h1>REGISTER HERE</h1>
           <h2>
-            Your main ethereum wallet will be deducted with 10 ETH by default
-            when you open an account
+            Your main ethereum wallet will be deducted with 2 ETH by default
+            when you open an account and this 2 ETH will be deposited in your bank account
           </h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="create-form">
             <input
-              className="form-input"
+              className="form-input-field"
               type="text"
               placeholder="Name of the account holder"
               value={accountHolder}
@@ -135,8 +135,9 @@ const CreateAccount = () => {
                 setAccountHolder(e.target.value);
               }}
             ></input>
+         
             <input
-              className="form-input"
+              className="form-input-field"
               value={accountLocation}
               onChange={(e) => {
                 setAccountLocation(e.target.value);

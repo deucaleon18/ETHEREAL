@@ -97,6 +97,7 @@ const DisplayAccounts = () => {
 
     <div className="display-accounts">
       <div className="accounts">
+        <h1>YOUR REGISTERED ACCOUNTS</h1>
         <div className="account-bars-container">
            {
             !loading?bankAccounts.map((account)=>{
@@ -116,11 +117,7 @@ const DisplayAccounts = () => {
            }
        
           
-          {/* <div className="account-bars"></div>
-          <div className="account-bars"></div>
-          <div className="account-bars"></div>
-          <div className="account-bars"></div>
-          <div className="account-bars"></div> */}
+         
         </div>
       </div>
 

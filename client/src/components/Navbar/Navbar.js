@@ -13,7 +13,8 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <div className="navlogocontainer">
+      <div className="navlogocontainer" onClick={()=>{window.location.href="/"}}>
+
         <h1>Ethereal</h1>
       </div>
       <div className="navlistcontainer">
@@ -25,15 +26,15 @@ const Navbar = () => {
             <li className="navlistelements">LOGIN</li>
           </a> */}
 
-          {logged?( 
-            <>
+          {/* {logged?( 
+            <> */}
           <a href="/accounts">
             <li className="navlistelements">ACCOUNTS</li>
           </a>
           <a href="/create">
             <li className="navlistelements">REGISTER</li>
           </a>
-          </>): null}
+          {/* </>): null} */}
         
         </ul>
       </div>
@@ -42,3 +43,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

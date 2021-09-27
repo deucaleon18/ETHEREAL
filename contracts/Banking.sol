@@ -165,11 +165,9 @@ contract Banking {
 //Function to get a loan from the bank the accounts will be virtually updated but the actual ETH will only be transferred if you want to withdraw the amount 
     function getLoan(uint256 _amount, uint256 _serial)  public payable  
     
-    
     {
         balances[_serial] += _amount/1000000000000000000;
         accounts[_serial].balance += _amount/1000000000000000000;
-
         bankBalance -= _amount/1000000000000000000;
     }
 

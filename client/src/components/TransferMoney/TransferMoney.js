@@ -57,9 +57,13 @@ const TransferMoney = () => {
   }, [web3, account, contract]);
   
 
+
+
+
   const handleTransaction=async(e)=>{
    e.preventDefault()
-   await contract.methods.transactAmount(transferAmount,transferSerial,id).send({from:account,to:contract.options.address,value:transferAmount})
+   await contract.methods.transactAmount(web3.utils.fromWei(transferAmount,'ether'),transferSerial,id).send(
+     {from:account,to:contract.options.address})
    
    .then((res)=>{
      console.log(res)
@@ -70,20 +74,44 @@ const TransferMoney = () => {
   }
 
 
+
+
+
+
   if (!web3) {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
   return (
     <div className="transaction-section">
-      <h1>Welcome to the transfers section</h1>
-
-      <h2>Welcome to the transfers section</h2>
-
-      <form onSubmit={handleTransaction}>
-        <input type="text" placeholder="Enter the amount you want to transfer " value={transferAmount} onChange={(e)=>{setTransferAmount(e.target.value)}}></input>
-        <input type="text" placeholder="Enter the serial number of the account you want to transfer this amount" value={transferSerial} onChange={(e)=>{setTransferSerial(e.target.value)}}/>
-        <button className="transfer-button" type="submit">INITITATE TRANSFER</button>
-      </form>
+      <div className="transfer-section-wrapper">
+        <h1>Welcome to the transfers section</h1>
+        <h2>
+          Now easily transfer virtual currency from one account to the other{" "}
+        </h2>
+        <form onSubmit={handleTransaction} className="transaction-form">
+          <input
+            type="text"
+            placeholder="Enter the amount you want to transfer "
+            value={transferAmount}
+            className="transaction-input"
+            onChange={(e) => {
+              setTransferAmount(e.target.value);
+            }}
+          ></input>
+          <input
+            type="text"
+            placeholder="Enter the serial number of the account you want to transfer this amount"
+            value={transferSerial}
+            className="transaction-input"
+            onChange={(e) => {
+              setTransferSerial(e.target.value);
+            }}
+          />
+          <button className="transfer-button" type="submit">
+            INITITATE TRANSFER
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

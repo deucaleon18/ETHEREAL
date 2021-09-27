@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import BankingContract from "../../contracts/Banking.json";
 import getWeb3 from "../../getWeb3";
-
+import Loader from "react-loader-spinner";
 import "./AccountDetails.css";
 
 const AccountDetails = () => {
@@ -11,6 +11,7 @@ const AccountDetails = () => {
   const [web3, setWeb3] = useState(undefined);
   const [contractAddress,setContractAddress]=useState(undefined)
   const [bankingAccount,setBankingAccount]=useState(undefined)
+  const [createdDate,setCreatedDate]=useState(undefined)
   const [loading,setLoading]=useState(true)
   
   
@@ -65,6 +66,9 @@ const AccountDetails = () => {
       await contract.methods.accounts(id).call()
       .then((res)=>{
         setBankingAccount(res)
+
+        setCreatedDate((new Date(res.createdAt*1000)).toLocaleString())
+        console.log(createdDate)
         console.log(res)
       })
       .then(()=>{
@@ -181,48 +185,76 @@ const AccountDetails = () => {
 
 
   if (!web3) {
-    return <div>Loading Web3, accounts, and contract...</div>;
+    return (
+      <div className="default">
+        <Loader
+          type="TailSpin"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          timeout={10000} //10 secs
+        />
+      </div>
+    );
   }
   return (
     <div className="account-details-section">
-      <div className="account-card">
-        {!loading ? (
-          <div>
-            <h1>{bankingAccount.serial}</h1>
-            <h1>{bankingAccount.name}</h1>
-            <h1>{bankingAccount.balance}</h1>
-          </div>
-        ) : null}
-      </div>
+      <div className="account-details-grid-wrapper">
+        <div className="account-card">
+          {!loading ? (
+            <div className="inner-wrapper">
+              <h1>ACOUNT-NUMBER : {bankingAccount.serial}</h1>
+              <h1>ACCOUNT-NAME : {bankingAccount.name}</h1>
+              <h1>ACCOUNT-BALANCE : {bankingAccount.balance} ETH</h1>
+              <h1>ACCOUNT-LOCATION : {bankingAccount.location}</h1>
+              <h1>ACCOUNT-CREATED-AT : {createdDate}</h1>
+            </div>
+          ) : null}
+        </div>
 
-      <div className="add-balance-card">
-        <form onSubmit={addBalance}>
-          <input
-            type="number"
-            placeholder="add amount"
-            value={balanceAdded}
-            onChange={(e) => {
-              setBalanceAdded(e.target.value);
-            }}
-          />
-          <button type="submit"> ADD</button>
-        </form>
-      </div>
-      <div className="withdraw-balance-card">
-        <form onSubmit={withdrawBalance}>
-          <input
-            type="number"
-            placeholder="withdraw amount"
-            value={balanceWithdrawn}
-            onChange={(e) => {
-              setBalanceWithdrawn(e.target.value);
-            }}
-          />
-          <button type="submit"> WITHDRAW</button>
-        </form>
+        <div className="add-balance-card">
+          <h1>Add more balance to your account</h1>
+          <form onSubmit={addBalance} className="transact-form">
+            <input
+              type="number"
+              className="form-input-account"
+              placeholder="Add amount"
+              value={balanceAdded}
+              onChange={(e) => {
+                setBalanceAdded(e.target.value);
+              }}
+            />
+            <button className="approve-button" type="submit">
+              ADD
+            </button>
+          </form>
+        </div>
+
+        <div className="withdraw-balance-card">
+          <h1>Withdraw the balance from your existing account</h1>
+          <form onSubmit={withdrawBalance} className="transact-form">
+            <input
+              type="number"
+              className="form-input-account"
+              placeholder="Withdraw amount"
+              value={balanceWithdrawn}
+              onChange={(e) => {
+                setBalanceWithdrawn(e.target.value);
+              }}
+            />
+            <button className="approve-button" type="submit">
+              WITHDRAW
+            </button>
+          </form>
+        </div>
 
         <div className="transfer-balance-card">
+          <h1>
+            Now you can easily transfer your virtual balance from your account
+            to other account
+          </h1>
           <button
+            className="approve-button"
             onClick={() => {
               window.location = `/transfer/${id}`;
             }}
@@ -230,11 +262,17 @@ const AccountDetails = () => {
             TRANSFER BALANCE TO OTHER ACCOUNTS
           </button>
         </div>
+
         <div className="loan-transaction-card">
+          <h1>
+            You can also easily take loans which can be paid on monthly
+            installments with constant interest rates.
+          </h1>
+
           <button
+            className="approve-button"
             onClick={() => {
-              
-               window.location = `/loans/${id}`;
+              window.location = `/loans/${id}`;
             }}
           >
             GET EASY LOANS
@@ -244,5 +282,7 @@ const AccountDetails = () => {
     </div>
   );
 };
+
+
 
 export default AccountDetails;

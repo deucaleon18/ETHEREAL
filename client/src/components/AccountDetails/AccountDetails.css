@@ -1,9 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200;300;400&family=Rubik:wght@300;400;500&family=Stick+No+Bills:wght@200;300;400&display=swap');
+
 .account-details-section{
-    height:90vh;
-    display:flex;
-    
+    min-height:90vh;
+    height:auto;
+    width:100%;
 }
+
+
+.account-details-grid-wrapper{
+    width:100%;
+    height:100%;
+    display:grid;
+
+    grid-template-areas:"card card transact transact"
+                        "card card loans loans"
+                        "deposit deposit withdraw withdraw";
+                            grid-template-columns: 2fr 1fr 1fr 2fr;
+    grid-template-rows:1fr 1fr 1fr;
+}
+
+
+
+.inner-wrapper{
+    margin:50px;
+}
+
+.account-card{
+  font-family: 'Rubik', sans-serif;
+
+  font-weight:600;
+    margin:100px 100px;
+    border-radius:10px;
+    background-color: black;
+    color:white;
+    grid-area:card;
+}
+
+
+
+
+
 .add-balance-card{
-    margin:10px;
+     margin:20px 100px;
+    grid-area:deposit
+}
+
+
+.withdraw-balance-card{
+     margin:30px;
+    grid-area:withdraw
+}
+
+.withdraw-balance-card>h1{
+    color: white;
+
+}
+.transfer-balance-card{
+    display: flex;
+    flex-direction: column;
+     margin:30px;
+    grid-area:transact
+}
+
+.transfer-balance-card>h1{
+    color:white
+}
+
+.loan-transaction-card>h1{
+    color:white
+}
+
+.add-balance-card>h1{
+    color:white
+}
+
+.loan-transaction-card{
+     margin:30px;
+    grid-area:loans
+}
+
+
+
+.form-input-account{
+  outline:none;
+  border:none;
+  height:36px;
+  width:250px;
+  font-size: clamp(1.2rem,1.4rem,2rem);
+}
+
+
+
+.transact-from{
+    display: flex;
+    flex-direction:column;
+}
+.approve-button{
+    margin-left:10px;
+    background-color: black;
+    height:40px;
+    width:220px;
+    color:white;
+    border-radius: 10px;
+    outline: none;
+    border:none;
+}
+
+.approve-button:hover{
+    cursor:pointer;
+    transition: 400ms;
+    background-color: white;
+    color:black;
+    height:40px;
+
 }
 

@@ -56,7 +56,13 @@ const LoanTransaction = () => {
   if (!web3) {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
-  return <div className="transaction-section"></div>;
+  return <div className="loan-section">
+    
+    <h1>Welcome to the loan section</h1>
+    
+
+
+  </div>;
 };
 
 export default LoanTransaction;
