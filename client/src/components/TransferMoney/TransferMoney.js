@@ -62,11 +62,12 @@ const TransferMoney = () => {
 
   const handleTransaction=async(e)=>{
    e.preventDefault()
-   await contract.methods.transactAmount(web3.utils.fromWei(transferAmount,'ether'),transferSerial,id).send(
+   await contract.methods.transactAmount(web3.utils.toWei(transferAmount,'ether'),transferSerial,id).send(
      {from:account,to:contract.options.address})
    
    .then((res)=>{
      console.log(res)
+    //  window.location.href=`/accounts/${id}`
    })
    .catch((err)=>{
      console.log(err)

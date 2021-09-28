@@ -127,15 +127,17 @@ const AccountDetails = () => {
       typeof web3 !== "undefined"
     ){
 
-     await contract.methods.addBalance(id,balanceAdded).send({from:account,value:balanceAdded})
+     await contract.methods
+       .addBalance(id, web3.utils.toWei(balanceAdded,'ether'),account)
+       .send({ from: account,value: web3.utils.toWei(balanceAdded,'ether') })
 
-      .then((res)=>{
-        window.location.reload();
-       console.log(res)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+       .then((res) => {
+         window.location.reload();
+         console.log(res);
+       })
+       .catch((err) => {
+         console.log(err);
+       });
     }
   };
 
@@ -157,12 +159,17 @@ const AccountDetails = () => {
       typeof contract !== "undefined" &&
       typeof account !== "undefined" &&
       typeof web3 !== "undefined"
+      // &&
+      // bankingAccount.balance>=balanceWithdrawn+1
     ) 
+    
     { 
         console.log(contract.options.address);
        
+
       await contract.methods
-        .withdrawBalance(id, balanceWithdrawn, account
+        .withdrawBalance(id,web3.utils.toWei(balanceWithdrawn,'ether'), account
+        
 
         //Here from and to is only for sending gas from our deployed account to the contract to just call the method
         //In the contract the withdrawAmount is transferred from the contract to our specified ethereum account here

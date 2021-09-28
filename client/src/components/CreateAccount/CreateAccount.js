@@ -94,7 +94,7 @@ const CreateAccount = () => {
           .send({
             from: account,
             to: contract.options.address,
-            value: 2000000000000000000,
+            value: web3.utils.toWei('2','ether'),
           })
           .then((res) => {
             //  web3.eth.sendTransaction({
@@ -103,12 +103,16 @@ const CreateAccount = () => {
             //    value: 22222222222222222222,
             //  });
             console.log(res);
+            window.location.href="/accounts"
           })
           .catch((err) => {
             console.log(err);
           });
       }
     };
+
+
+
 
 
 
