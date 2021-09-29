@@ -88,6 +88,9 @@ const CreateAccount = () => {
         typeof account !== "undefined" &&
         typeof web3 !== "undefined"
       ) {
+ 
+        
+
 
         await contract.methods
           .createAccount(account,accountHolder, accountLocation)
@@ -147,7 +150,7 @@ const CreateAccount = () => {
                 setAccountLocation(e.target.value);
               }}
               type="text"
-              placeholder="Address of the account holder"
+              placeholder="Home Address of account holder"
             ></input>
 
             <button className="submit-button" type="submit">
@@ -158,7 +161,7 @@ const CreateAccount = () => {
       </div>
 
       <div className="image-wrapper">
-        <img src="./assets/2.svg" className="create-account-image" />
+        <img src="./assets/2.svg" className="create-account-image" alt=""/>
       </div>
     </div>
   );

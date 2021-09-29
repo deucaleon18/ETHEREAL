@@ -3,6 +3,7 @@ import {BrowserRouter as Router,Route} from 'react-router-dom'
 import AccountDetails from './components/AccountDetails/AccountDetails'
 import CreateAccount from './components/CreateAccount/CreateAccount'
 import DisplayAccounts from './components/DisplayAccounts/DisplayAccounts'
+import DisplayTransactions from './components/DisplayTransactions/DisplayTransactions'
 import LoanTransaction from './components/LoanTransaction/LoanTransaction'
 import MainSection from './components/MainSection/MainSection'
 import TransferMoney from './components/TransferMoney/TransferMoney'
@@ -31,7 +32,9 @@ const Routing = () => {
           <Route exact path="/loans/:id">
             <LoanTransaction />
           </Route>
-          
+          <Route exact path="/transactions/:id">
+            <DisplayTransactions/>
+          </Route>
         </Router>
       </div>
     );

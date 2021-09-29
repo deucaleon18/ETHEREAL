@@ -1,4 +1,67 @@
-.loan-section{
-    height:90vh;
-    
+.loan-section {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.loan-text-wrapper {
+  margin: 60px;
+  width: 50%;
+}
+
+.loan-image-wrapper {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.loan-text-wrapper > h1 {
+  font-weight: 800;
+  font-size: clamp(1rem, 3.2rem, 5rem);
+}
+
+.loan-text-wrapper > h2 {
+  font-weight: 600;
+  font-size: clamp(0.8rem, 1.5rem, 4rem);
+}
+
+
+.loan-form{
+    display:flex;
+    flex-direction: column;
+
+}
+
+.loan-form-input{
+    background-color: black;
+    border-radius: 10px;
+    border:none;
+    outline: none;
+    height:50px;
+    margin:15px 0;
+    width:600px;
+    cursor: pointer;
+    color:white;
+    font-size:1.2rem;
+
+}
+
+.loan-submit-button{
+    margin: 15px 0;
+    background-color: black;
+    color:white;
+    height:40px;
+    width:160px;
+    border-radius: 10px;
+    outline: none;
+    border:none;
+    cursor: pointer;
+}
+
+.loan-submit-button:hover{
+    background-color: white;
+    color:black;
+    transition: 400ms;
+
 }

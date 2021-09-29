@@ -62,39 +62,46 @@ const AccountDetails = () => {
   
   useEffect(() => {
     const getContractDetails = async () => {
-      console.log(id)
-      await contract.methods.accounts(id).call()
-      .then((res)=>{
-        setBankingAccount(res)
+      console.log(id);
+      await contract.methods
+        .accounts(id)
+        .call()
+        .then((res) => {
+          setBankingAccount(res);
 
-        setCreatedDate((new Date(res.createdAt*1000)).toLocaleString())
-        console.log(createdDate)
-        console.log(res)
-      })
-      .then(()=>{
-         setLoading(false)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-    
+          setCreatedDate(new Date(res.createdAt * 1000).toLocaleString());
+          console.log(createdDate);
+          console.log(res);
+        })
+        .then(() => {
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
       //Get the contact balance
-      await contract.methods.getContractBalance().call()
-      .then((res)=>{console.log(web3.utils.fromWei(res, "ether"));})
-      .catch((err)=>{console.log(err)})
-      
+      await contract.methods
+        .getContractBalance()
+        .call()
+        .then((res) => {
+          console.log(web3.utils.fromWei(res, "ether"));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
       //Get the sender balance
       await contract.methods
         .getSenderBalance(account)
         .call()
         .then((res) => {
-          console.log(account)
-          console.log(web3.utils.fromWei(res,'ether'));
+          console.log(account);
+          console.log(web3.utils.fromWei(res, "ether"));
         })
         .catch((err) => {
           console.log(err);
         });
-  
     };
     if (
       typeof contract !== "undefined" &&
@@ -103,9 +110,10 @@ const AccountDetails = () => {
     ) {
       console.log(contract);
       console.log(contract.options.address);
-      console.log(contractAddress)
+      console.log(contractAddress);
       getContractDetails();
     }
+    // eslint-disable-next-line
   }, [web3, account, contract]);
 
 
@@ -283,6 +291,22 @@ const AccountDetails = () => {
             }}
           >
             GET EASY LOANS
+          </button>
+        </div>
+
+        <div className="transaction-history">
+          <h1>
+            You can view your complete transaction history for this account here 
+          </h1>
+          <button className="approve-button"
+           
+           onClick={()=>{
+             window.location.href=`/transactions/${id}`
+           }}
+          
+          
+          >
+          TRANSACTION HISTORY 
           </button>
         </div>
       </div>

@@ -1,20 +1,16 @@
-import React,{useEffect,useState} from "react";
+// eslint-disable-next-line
+import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 
 const Navbar = () => {
-  
-   const[logged,setLogged]=useState(false)
- useEffect(()=>{
-   const logged=localStorage.getItem("logged")
-   setLogged(logged)
-   console.log(logged)
- })
-
-
   return (
     <div className="navbar">
-      <div className="navlogocontainer" onClick={()=>{window.location.href="/"}}>
-
+      <div
+        className="navlogocontainer"
+        onClick={() => {
+          window.location.href = "/";
+        }}
+      >
         <h1>Ethereal</h1>
       </div>
       <div className="navlistcontainer">
@@ -35,7 +31,6 @@ const Navbar = () => {
             <li className="navlistelements">REGISTER</li>
           </a>
           {/* </>): null} */}
-        
         </ul>
       </div>
     </div>
@@ -43,4 +38,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

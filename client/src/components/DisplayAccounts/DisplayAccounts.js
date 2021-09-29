@@ -47,30 +47,33 @@ const DisplayAccounts = () => {
 
   useEffect(() => {
     const getContractDetails = async () => {
-      
+      const serialNumber = await contract.methods.serialNumber().call();
+      console.log(serialNumber);
 
-      const serialNumber=await contract.methods.serialNumber().call()
-      console.log(serialNumber)
-
-
-     for(let i=1;i<=serialNumber;i++)
-      {await contract.methods.accounts(i).call()
-      .then((res)=>{
-        var bankAcc=bankAccounts;
-        if(res.creator===account)
-        {bankAcc.push({name:res.name,location:res.location,serialNumber:res.serial,balance:res.balance})}
-        setBankAccounts(bankAcc)
-        console.log(res)
-        console.log(bankAccounts)
-        
-        })
-      .catch((err)=>{
-        console.log(err)
-      })
-      
+      for (let i = 1; i <= serialNumber; i++) {
+        await contract.methods
+          .accounts(i)
+          .call()
+          .then((res) => {
+            var bankAcc = bankAccounts;
+            if (res.creator === account) {
+              bankAcc.push({
+                name: res.name,
+                location: res.location,
+                serialNumber: res.serial,
+                balance: res.balance,
+              });
+            }
+            setBankAccounts(bankAcc);
+            console.log(res);
+            console.log(bankAccounts);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
 
-      setLoading(false)
+      setLoading(false);
     };
     if (
       typeof contract !== "undefined" &&
@@ -79,13 +82,8 @@ const DisplayAccounts = () => {
     ) {
       getContractDetails();
     }
+    // eslint-disable-next-line
   }, [web3, account, contract]);
-  
-  
-
-
-
-  const id='fsfwefrwefr'
   
 
 
@@ -122,7 +120,7 @@ const DisplayAccounts = () => {
       </div>
 
       <div className="accounts-image">
-        <img src="./assets/4.svg" className="accounts-display-image" />
+        <img src="./assets/4.svg" className="accounts-display-image" alt=""/>
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ const TransferMoney = () => {
   const[transferAmount,setTransferAmount]=useState("")
   const[transferSerial,setTransferSerial]=useState("")
   
+  
   const { id }=useParams()
   useEffect(() => {
     const getBasicDetails = async () => {
@@ -30,6 +31,7 @@ const TransferMoney = () => {
           BankingContract.abi,
           deployedNetwork && deployedNetwork.address
         );
+
         setWeb3(web3);
         setAccount(accounts[0]);
         setContract(instance);
