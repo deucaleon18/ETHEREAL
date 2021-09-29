@@ -42,6 +42,9 @@ contract Banking {
         string transacType;
         uint256 accountSerialNumber;
     }
+    
+
+
 
     // All the mappings present in the contract
     mapping(uint256 => Account) public accounts;
@@ -63,6 +66,8 @@ contract Banking {
         uint256 _currentAccountSerial,
         bytes32 _transactionType
     );
+
+
 
     //Function to create account , the 2 ETH balance will be taken from your ethereum account and deposited to the banking contract
     function createAccount(
@@ -103,6 +108,9 @@ contract Banking {
         }
     }
 
+
+
+
     //Function to add balance to your existing acccount ,the balance will be taken from your ethereum account
     function addBalance(
         uint256 _serial,
@@ -113,6 +121,7 @@ contract Banking {
             accounts[_serial].balance += _amount / 1000000000000000000;
             bankBalance += _amount / 1000000000000000000;
             transacNum++;
+
             transactions[transacNum] = Transaction(
                 transacNum,
                 accounts[_serial].balance,
@@ -121,6 +130,7 @@ contract Banking {
                 "AddingBalance",
                 _serial
             );
+
             emit TransactionCompleted(
                 _amount / 1000000000000000000,
                 transacNum,
@@ -133,12 +143,15 @@ contract Banking {
         }
     }
 
+
+
     //Function to withdraw balance from your existing accounts, the balance will be transferred to your blockchain account
     function withdrawBalance(
         uint256 _serial,
         uint256 _amount,
         address payable _creator
-    ) external returns (bool _success) {
+    ) 
+    external returns (bool _success) {
         if (accounts[_serial].balance >= _amount / 1000000000000000000 + 1) {
             _creator.transfer(_amount);
             accounts[_serial].balance -= _amount / 1000000000000000000;
@@ -164,6 +177,8 @@ contract Banking {
             //   revert InsufficientFunds(_serial,_amount/1000000000000000000,accounts[_serial].balance-1,'Withdrawal');
         }
     }
+
+
 
     //Function to virtually send money from one bank account to other
     function transactAmount(
@@ -210,9 +225,11 @@ contract Banking {
         }
     }
 
+
+
     //Function to get a loan from the bank the accounts will be virtually updated but the actual ETH will only be transferred if you want to withdraw the amount
     function getLoan(uint256 _amount, uint256 _serial) public payable {
-        if (bankBalance >= _amount / 100000000000000000) {
+        // if (bankBalance >= _amount / 100000000000000000) {
             accounts[_serial].balance += _amount / 1000000000000000000;
             transacNum++;
             transactions[transacNum] = Transaction(
@@ -229,10 +246,12 @@ contract Banking {
                 _serial,
                 "LoanTransaction"
             );
-        } else {
-            revert("Insufficient Funds");
-            // revert InsufficientFunds(_serial,_amount/1000000000000000000,bankBalance/10,'LoanTransaction');
-        }
+        // }
+        
+        //  else {
+        //     revert("Insufficient Funds");
+        //     // revert InsufficientFunds(_serial,_amount/1000000000000000000,bankBalance/10,'LoanTransaction');
+        // }
     }
 
     function retrieveLoan(
@@ -267,11 +286,15 @@ contract Banking {
         }
     }
 
+    
+
     //Simple spare function to getBalance of any of the serial accounts won't be of much use but let's see
     function getBalance(uint256 _serial) public view returns (uint256) {
         uint256 bal = accounts[_serial].balance;
         return bal;
     }
+
+
 
     //Function to get the msg.sender's ETH balance
     function getSenderBalance(address payable _account)
@@ -293,8 +316,4 @@ contract Banking {
     }
 }
 
-//Terminal commands for truffle
-// var instance=await Banking.deployed()
-// var owner=await instance.getOwner()
-// var main =await instance.getMainAccount()
-// await instance.sendBalance()
+

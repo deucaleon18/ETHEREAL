@@ -30,10 +30,10 @@ const CreateAccount = () => {
         const accounts = await web3.eth.getAccounts();
 
         // Get the contract instance.
-        // const networkId = await web3.eth.net.getId();
+        const networkId = await web3.eth.net.getId();
 
 
-        const deployedNetwork = BankingContract.networks[5777];
+        const deployedNetwork = BankingContract.networks[networkId];
         
         console.log(deployedNetwork.address)
 

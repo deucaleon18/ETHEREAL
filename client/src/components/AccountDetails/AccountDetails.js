@@ -13,7 +13,7 @@ const AccountDetails = () => {
   const [bankingAccount,setBankingAccount]=useState(undefined)
   const [createdDate,setCreatedDate]=useState(undefined)
   const [loading,setLoading]=useState(true)
-  
+  const [bankingAccountBalance,setBankingAccountBalance]=useState(undefined)
   
 
   const [balanceAdded, setBalanceAdded] = useState("");
@@ -68,7 +68,7 @@ const AccountDetails = () => {
         .call()
         .then((res) => {
           setBankingAccount(res);
-
+          setBankingAccountBalance(res.balance)
           setCreatedDate(new Date(res.createdAt * 1000).toLocaleString());
           console.log(createdDate);
           console.log(res);
@@ -136,11 +136,20 @@ const AccountDetails = () => {
     ){
 
      await contract.methods
-       .addBalance(id, web3.utils.toWei(balanceAdded,'ether'),account)
-       .send({ from: account,value: web3.utils.toWei(balanceAdded,'ether') })
+       .addBalance(id, web3.utils.toWei(balanceAdded, "ether"), account)
+       .send({ from: account, value: web3.utils.toWei(balanceAdded, "ether") })
 
-       .then((res) => {
-         window.location.reload();
+       .then(async (res) => {
+
+         await contract.methods
+           .accounts(id)
+           .call()
+           .then((res) => {
+             setBankingAccountBalance(res.balance);
+           })
+           .catch((err) => {
+             console.log(err);
+           });
          console.log(res);
        })
        .catch((err) => {
@@ -181,13 +190,13 @@ const AccountDetails = () => {
 
         //Here from and to is only for sending gas from our deployed account to the contract to just call the method
         //In the contract the withdrawAmount is transferred from the contract to our specified ethereum account here
-
         ).send({from:account,to:contract.options.address})
-        
+        .then(async(res) => {
 
-        .then((res) => {
-          window.location.reload()
-
+           await contract.methods.accounts(id).call().then((res)=>{
+             setBankingAccountBalance(res.balance)
+           })
+           .catch((err)=>{console.log(err)})
           console.log(res);
         })
         .catch((err) => {
@@ -195,7 +204,6 @@ const AccountDetails = () => {
         });
     }
   };
-
 
 
 
@@ -218,9 +226,9 @@ const AccountDetails = () => {
         <div className="account-card">
           {!loading ? (
             <div className="inner-wrapper">
-              <h1>ACOUNT-NUMBER : {bankingAccount.serial}</h1>
+              <h1>ACCOUNT-NUMBER : {bankingAccount.serial}</h1>
               <h1>ACCOUNT-NAME : {bankingAccount.name}</h1>
-              <h1>ACCOUNT-BALANCE : {bankingAccount.balance} ETH</h1>
+              <h1>ACCOUNT-BALANCE : {bankingAccountBalance} ETH</h1>
               <h1>ACCOUNT-LOCATION : {bankingAccount.location}</h1>
               <h1>ACCOUNT-CREATED-AT : {createdDate}</h1>
             </div>
@@ -303,8 +311,6 @@ const AccountDetails = () => {
            onClick={()=>{
              window.location.href=`/transactions/${id}`
            }}
-          
-          
           >
           TRANSACTION HISTORY 
           </button>

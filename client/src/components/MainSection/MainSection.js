@@ -46,6 +46,9 @@ const MainSection = () => {
     getBasicDetails();
   }, []);
 
+
+
+
   useEffect(() => {
     const getContractDetails = async () => {};
     if (
@@ -55,11 +58,6 @@ const MainSection = () => {
     ) {
       localStorage.setItem("logged", true);
 
-      //   await contract.methods.loginAccount(account).call()
-      //   .then((res)=>{
-      //     console.log(res)
-      //   })
-      //   .catch((err)=>{})
       getContractDetails();
     }
   }, [web3, account, contract]);

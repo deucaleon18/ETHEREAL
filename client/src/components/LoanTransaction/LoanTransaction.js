@@ -131,7 +131,7 @@ const LoanTransaction = () => {
             if (retrieveCount < numOfInstallments) {
               loanRetrieval();
             }
-          }, 20000);
+          }, 10000);
         })
         .catch((err) => {
           console.log(err);
@@ -151,7 +151,7 @@ const LoanTransaction = () => {
           ,once your loan is approved you will get a prompt every minute to
           approve the transaction which is of the value of your each
           installment. In this application every month or installment period is
-          20 seconds.
+          10 seconds.
         </h2>
 
         <form className="loan-form">
