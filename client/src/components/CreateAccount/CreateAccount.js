@@ -13,13 +13,6 @@ const CreateAccount = () => {
   const [accountLocation,setAccountLocation]=useState("")
   
  
-
-
-
-
-
-
-
   useEffect(() => {
     const getBasicDetails = async () => {
       try {
@@ -100,11 +93,7 @@ const CreateAccount = () => {
             value: web3.utils.toWei('2','ether'),
           })
           .then((res) => {
-            //  web3.eth.sendTransaction({
-            //    from: account,
-            //    to: "0xdaB74b7DbA038eec5A99CE26257668CB86f6EC0C",
-            //    value: 22222222222222222222,
-            //  });
+           
             console.log(res);
             window.location.href="/accounts"
           })

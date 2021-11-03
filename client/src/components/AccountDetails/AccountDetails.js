@@ -176,8 +176,7 @@ const AccountDetails = () => {
       typeof contract !== "undefined" &&
       typeof account !== "undefined" &&
       typeof web3 !== "undefined"
-      // &&
-      // bankingAccount.balance>=balanceWithdrawn+1
+    
     ) 
     
     { 

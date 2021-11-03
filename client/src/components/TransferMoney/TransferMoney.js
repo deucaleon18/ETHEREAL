@@ -77,10 +77,6 @@ const TransferMoney = () => {
   }
 
 
-
-
-
-
   if (!web3) {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
@@ -114,6 +110,10 @@ const TransferMoney = () => {
             INITITATE TRANSFER
           </button>
         </form>
+      </div>
+
+      <div className="transfer-section-image">
+        <img src="/assets/4.svg" alt=""/>
       </div>
     </div>
   );

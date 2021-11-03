@@ -18,19 +18,14 @@ const Navbar = () => {
           <a href="/">
             <li className="navlistelements">HOME</li>
           </a>
-          {/* <a href="/about">
-            <li className="navlistelements">LOGIN</li>
-          </a> */}
-
-          {/* {logged?( 
-            <> */}
+      
           <a href="/accounts">
             <li className="navlistelements">ACCOUNTS</li>
           </a>
           <a href="/create">
             <li className="navlistelements">REGISTER</li>
           </a>
-          {/* </>): null} */}
+      
         </ul>
       </div>
     </div>

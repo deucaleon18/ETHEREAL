@@ -83,47 +83,56 @@ const DisplayTransactions = () => {
   }
 
   return (
-    <div className="account-transactions">
-      <h1> TRANSACTION HISTORY</h1>
-      <div className="account-transaction-bars">
-        <div className="transaction-bar-header">
-          <div className="col-1">
-            <h1> AMT.</h1>
+    <div className="account-transaction-wrapper">
+      <div className="account-transactions">
+        <h1> TRANSACTION HISTORY</h1>
+        <div className="account-transaction-bars">
+          <div className="transaction-bar-header">
+            <div className="col-1">
+              <h1> AMT.</h1>
+            </div>
+            <div className="col-2">
+              <h1>TYPE</h1>
+            </div>
+            <div className="col-3">
+              <h1>BALANCE</h1>
+            </div>
+            <div className="col-4">
+              <h1>TIME</h1>
+            </div>
           </div>
-          <div className="col-2">
-            <h1>TYPE</h1>
-          </div>
-          <div className="col-3">
-            <h1>BALANCE</h1>
-          </div>
-          <div className="col-4">
-            <h1>TIME</h1>
-          </div>
-        </div>
-        {
-          // !loading?
-          transactionHistory.map((transaction) => {
-            var time = new Date(transaction.createdAt * 1000).toLocaleString();
+          {
+            // !loading?
+            transactionHistory.map((transaction) => {
+              var time = new Date(
+                transaction.createdAt * 1000
+              ).toLocaleString();
 
-            return (
-              <div className="transaction-bar">
-                <div className="col-1">
-                  <h1>{transaction.amountTransacted}</h1>
+              return (
+                <div className="transaction-bar">
+                  <div className="col-1">
+                    <h1>{transaction.amountTransacted}</h1>
+                  </div>
+                  <div className="col-2">
+                    <h1>{transaction.transacType}</h1>
+                  </div>
+                  <div className="col-3">
+                    <h1>{transaction.currentBalance}</h1>
+                  </div>
+                  <div className="col-4">
+                    <h1>{time}</h1>
+                  </div>
                 </div>
-                <div className="col-2">
-                  <h1>{transaction.transacType}</h1>
-                </div>
-                <div className="col-3">
-                  <h1>{transaction.currentBalance}</h1>
-                </div>
-                <div className="col-4">
-                  <h1>{time}</h1>
-                </div>
-              </div>
-            );
-          })
-          // :null
-        }
+              );
+            })
+            // :null
+          }
+        </div>
+     
+      </div>
+
+      <div className="display-transaction-image">
+        <img src="/assets/6.svg" alt=""/>
       </div>
     </div>
   );
