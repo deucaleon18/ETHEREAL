@@ -4,60 +4,25 @@ import BankingContract from "../../contracts/Banking.json";
 import getWeb3 from "../../getWeb3";
 import Loader from "react-loader-spinner";
 import "./AccountDetails.css";
+import useBasicDetails from "../../hooks/useBasicDetails";
+
 
 const AccountDetails = () => {
-  const [contract, setContract] = useState(undefined);
-  const [account, setAccount] = useState(undefined);
-  const [web3, setWeb3] = useState(undefined);
+  
   const [contractAddress,setContractAddress]=useState(undefined)
   const [bankingAccount,setBankingAccount]=useState(undefined)
   const [createdDate,setCreatedDate]=useState(undefined)
   const [loading,setLoading]=useState(true)
   const [bankingAccountBalance,setBankingAccountBalance]=useState(undefined)
-  
-
   const [balanceAdded, setBalanceAdded] = useState("");
-
-
-
   const [balanceWithdrawn, setBalanceWithdrawn] = useState("");
 
-
+  
   //Use the same variable predefined after " :"
   const { id } = useParams();
 
-  
-  //Loading web3 , contract , account
-  useEffect(() => {
-    const getBasicDetails = async () => {
-      try {
-        // Get network provider and web3 instance.
-        const web3 = await getWeb3();
+  const [web3,account,contract]=useBasicDetails()
 
-        // Use web3 to get the user's accounts.
-        const accounts = await web3.eth.getAccounts();
-
-        // Get the contract instance.
-        const networkId = await web3.eth.net.getId();
-        const deployedNetwork = BankingContract.networks[networkId];
-        setContractAddress(deployedNetwork.address)
-        const instance = new web3.eth.Contract(
-          BankingContract.abi,
-          deployedNetwork && deployedNetwork.address
-        );
-        setWeb3(web3);
-        setAccount(accounts[0]);
-        setContract(instance);
-      } catch (error) {
-        // Catch any errors for any of the above operations.
-        alert(
-          `Failed to load web3, accounts, or contract. Check console for details.`
-        );
-        console.error(error);
-      }
-    };
-    getBasicDetails();
-  }, []);
  
   
   useEffect(() => {
