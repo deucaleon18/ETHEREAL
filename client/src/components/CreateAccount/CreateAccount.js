@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
-import BankingContract from "../../contracts/Banking.json";
-import getWeb3 from "../../getWeb3";
+
 import "./CreateAccount.css";
 import useBasicDetails from "../../hooks/useBasicDetails";
 
 
 const CreateAccount = () => {
-  const [contract, setContract] = useState(undefined);
-  const [account, setAccount] = useState(undefined);
-  const [web3, setWeb3] = useState(undefined);
-  
+ 
   const [accountHolder,setAccountHolder]=useState("")
   const [accountLocation,setAccountLocation]=useState("")
   
-  const [web3,account,contract]=useBasicDetails()
+  const [web3,account,contract,contractAddress]=useBasicDetails()
 
 
   useEffect(() => {

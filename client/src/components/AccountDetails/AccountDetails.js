@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
-import BankingContract from "../../contracts/Banking.json";
-import getWeb3 from "../../getWeb3";
+
 import Loader from "react-loader-spinner";
 import "./AccountDetails.css";
 import useBasicDetails from "../../hooks/useBasicDetails";
@@ -9,7 +8,7 @@ import useBasicDetails from "../../hooks/useBasicDetails";
 
 const AccountDetails = () => {
   
-  const [contractAddress,setContractAddress]=useState(undefined)
+ 
   const [bankingAccount,setBankingAccount]=useState(undefined)
   const [createdDate,setCreatedDate]=useState(undefined)
   const [loading,setLoading]=useState(true)
@@ -21,7 +20,7 @@ const AccountDetails = () => {
   //Use the same variable predefined after " :"
   const { id } = useParams();
 
-  const [web3,account,contract]=useBasicDetails()
+  const [web3,account,contract,contractAddress]=useBasicDetails()
 
  
   

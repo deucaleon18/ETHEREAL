@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from "react";
-import BankingContract from "../../contracts/Banking.json";
-import getWeb3 from "../../getWeb3";
+
 
 import "./MainSection.css";
 import useBasicDetails from "../../hooks/useBasicDetails";
 
 
 const MainSection = () => {
-  const [contract, setContract] = useState(undefined);
-  const [account, setAccount] = useState(undefined);
-  const [web3, setWeb3] = useState(undefined);
 
   // eslint-disable-next-line
   const [storageValue, setStorageValue] = useState(undefined);
 
-  const [web3,account,contract]=useBasicDetails()
+  const [web3,account,contract,contractAddress]=useBasicDetails()
 
 
 

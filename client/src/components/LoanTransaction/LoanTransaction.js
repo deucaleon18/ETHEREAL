@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
-import BankingContract from "../../contracts/Banking.json";
-import getWeb3 from "../../getWeb3";
+
 import { useParams } from "react-router-dom";
 import "./LoanTransaction.css";
 import useBasicDetails from "../../hooks/useBasicDetails";
 
 
 const LoanTransaction = () => {
-  const [contract, setContract] = useState(undefined);
-  const [account, setAccount] = useState(undefined);
-  const [web3, setWeb3] = useState(undefined);
+ 
   const [loanValue, setLoanValue] = useState("");
   const [numOfInstallments, setNumOfInstallments] = useState("");
   const [loading, setLoading] = useState(true);
   const [accountBalance, setAccountBalance] = useState("");
   const { id } = useParams();
-  const [web3,account,contract]=useBasicDetails()
+  const [web3,account,contract,contractAddress]=useBasicDetails()
 
 
   useEffect(() => {

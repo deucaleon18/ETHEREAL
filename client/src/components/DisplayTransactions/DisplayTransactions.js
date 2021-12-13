@@ -1,8 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import './DisplayTransactions.css'
 import { useParams } from 'react-router-dom'
-import BankingContract from "../../contracts/Banking.json";
-import getWeb3 from "../../getWeb3";
 
 import useBasicDetails from "../../hooks/useBasicDetails";
 
@@ -10,14 +8,12 @@ import useBasicDetails from "../../hooks/useBasicDetails";
 const DisplayTransactions = () => {
   const { id } = useParams();
 
-  const [contract, setContract] = useState(undefined);
-  const [account, setAccount] = useState(undefined);
-  const [web3, setWeb3] = useState(undefined);
+  
   const [transactionHistory, setTransactionHistory] = useState([]);
   // eslint-disable-next-line
   const [loading, setLoading] = useState(true);
 
-  const [web3,account,contract]=useBasicDetails()
+  const [web3,account,contract,contractAddress]=useBasicDetails()
 
 
   useEffect(() => {

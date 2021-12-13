@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
-import BankingContract from "../../contracts/Banking.json";
-import getWeb3 from "../../getWeb3";
 
 import "./DisplayAccounts.css";
 import useBasicDetails from "../../hooks/useBasicDetails";
 
 
 const DisplayAccounts = () => {
-  const [contract, setContract] = useState(undefined);
-  const [account, setAccount] = useState(undefined);
-  const [web3, setWeb3] = useState(undefined);
+ 
   const [loading,setLoading]=useState(true)
 
 
   // eslint-disable-next-line
   const [bankAccounts, setBankAccounts] = useState([]);
 
-  const [web3,account,contract]=useBasicDetails()
+  const [web3,account,contract,contractAddress]=useBasicDetails()
 
 
   useEffect(() => {
